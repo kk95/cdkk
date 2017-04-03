@@ -1,88 +1,3 @@
-# FP4-proposal
-
-**do not fork this** there are different directions
-
-## tl;dr
-
-1. Create a repository in [our organization][oplorg] for your project; add your teammate(s) as collaborators
-2. Copy-paste this [template file](template.md) as the `README.md` file in your new repo; edit to become project plan
-3. Make 3-slide slide show to be presented in class; insert into [class desk][martinslides]
-4. Enter project details into a new [Google form][projform]
-5. Make a 0.1 release of your project (tagging `@fgmart`)
-
-## Due Date
-* Sun Apr 2, 2017 at 11p
-
-## Instructions
-
-Teams will submit a single proposal, with sections that each member has done individually detailing their proposed contributions. The submission will be the `README.md` file in your brand-new project repository, which you'll make. 
-
-You must start using GitHub collaboratively from this point forward. 
-
-Instructions: 
-
-1. Create a new repository for your project as part of [our organization][oplorg]
-  * Give it a name that you like—it may be your real names, usernames, or project name
-  * Add your teammates as collaborators (Settings > Collaborators & Teams > Add Collaborator)
-2. Copy the content from the [template file](template.md) into your `README.md`
-  * Click the “Raw” button on the `template.md` file and then copy-paste into your repo's `README.md` edit view
-  * Save it
-  * *Then start editing it to become your actual proposal*
-3. Everyone on the team contributes their sections to your `README.md` file.
-  * Use GitHub's collaboration features to make sure that each team member contributes meaningful content to the file
-  * At the absolute minimum, respective team members must have commits that show they have authored the section describing their planned contributions
-4. Create a [github Release](https://help.github.com/articles/creating-releases/) of your repository. 
- * Version: v0.1
- * Title: Proposal
- * Description: tag `@fgmart`
-
-And now some detail on what to write _in_ the report.
-
-**Overall guidance:** *You should be proposing something that you have high confidence that you can achieve, and the proposal should project that confidence.*
-
-The proposal should be no longer than necessary, but long enough to include critical detail. Diagrams are welcome. 
-
-Remember, you can do some neat [formatting things with Markdown.][markdown]
-
-In case you missed it, here again is the [template file](template.md)
-
-## In-Class Presentation 
-Teams will each deliver an in-class presentation. Your team will have two minutes to present.
-
-The presentation shall have exactly three slides:
-
-1. Title
-  * project title (10 words or fewer)
-  * your real names
-  * each real name followed by GitHub username
-  * a relevant image of some sort (optional)
-2. Overview
-  * a few short phrases describing the project
-  * a different relevant image (optional)
-3. Architecture Diagram 
-  * visual diagram showing the major components of the project
-  * include external things that your project will connect to
-  * include arrows showing flow of information
-  * internal components annotated with Racket libraries that they will use
-  * _important:_ annotate each block with the GH username of the person who is primarily responsible for its creation
-
-Make the slides in [Google Slides][gslides].
-
-Then, import your deck into the [slide deck][martinslides]. You have write privileges based on your membership in the class forum.
-
-You and your teammates will give the presentation in class the day that this assignment is due.
-
-## Fill out Project Information Form
-
-Enter project details into a new [Google form][projform].
-
-**This is absolutely necessary so I can keep track of all of the projects.**
-
-## Grading
-The proposal must be submitted on time to receive credit. Late submissions will not be accepted for credit.
-
-You personally must be present in class (and participate in the presentation when it is your turn) to receive credit for the presentation. If your teammates are there and you are not, they will receive presentation credit and you will not.
-
 # Stock Alert
 
 ### Statement
@@ -118,26 +33,14 @@ We will be successful if we are given responses at the appropriate times. Becaus
 ## Architecture Diagram
 ![test image](/Architecture.png?raw=true "test image")
 
-
-## Schedule
-Explain how you will go from proposal to finished product. 
-
-There are three deliverable milestones to explicitly define, below.
-
-The nature of deliverables depend on your project, but may include things like processed data ready for import, core algorithms implemented, interface design prototyped, etc. 
-
-You will be expected to turn in code, documentation, and data (as appropriate) at each of these stages.
-
-Write concrete steps for your schedule to move from concept to working system. 
-
 ### First Milestone (Sun Apr 9)
-Which portion of the work will be completed (and committed to Github) by this day? 
+We will be able to access stock values and print them in Racket. We will also be able to send text messages from Racket.
 
 ### Second Milestone (Sun Apr 16)
-Which portion of the work will be completed (and committed to Github) by this day?  
+We will be able to send stock values, and all objects will be designed. Our command interpreter will be complete at this time as well.
 
 ### Public Presentation (Mon Apr 24, Wed Apr 26, or Fri Apr 28 [your date to be determined later])
-What additionally will be completed before the public presentation?
+All other mentioned implementation details.
 
 ## Group Responsibilities
 Here each group member gets a section where they, as an individual, detail what they are responsible for in this project. Each group member writes their own Responsibility section. Include the milestones and final deliverable.
@@ -152,14 +55,12 @@ Please use Github properly: each individual must make the edits to this file rep
 
 In the headings below, replace the silly names and GitHub handles with your actual ones.
 
-### Susan Scheme @susanscheme
-will write the....
+### Christian Dumas @christianrdumas
+I will handle gathering stock values from Yahoo!
 
-### Leonard Lambda @lennylambda
-will work on...
+### Kshitij Karke @kk95
+I will parse xml files of he portfolio and have them get sent to your mobile phone. This could also include screetshots of charts sending them as an MMS. 
 
-### Frank Funktions @frankiefunk 
-Frank is team lead. Additionally, Frank will work on...   
 
 <!-- Links -->
 [forum]: https://groups.google.com/forum/#!forum/uml-opl-spr17
