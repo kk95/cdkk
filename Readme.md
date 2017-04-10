@@ -36,6 +36,9 @@ We will be successful if we are given responses at the appropriate times. Becaus
 ### First Milestone (Sun Apr 9)
 We will be able to access stock values and print them in Racket. We will also be able to send text messages from Racket.
 
+On time we were able to access stock values and also are almost able to send text messages.
+There is a login procedure with Google that isn't built in to Racket's SMTP methods.
+
 ### Second Milestone (Sun Apr 16)
 We will be able to send stock values, and all objects will be designed. Our command interpreter will be complete at this time as well.
 
