@@ -1,11 +1,7 @@
 #lang racket
 
-(require net/smtp)
+(require mutt)
 
-(smtp-send-message "smtp.gmail.com"
-                   "kshitijkarke@gmail.com"
-                   '("7742765067@vtext.com")
-                   "Heyo"
-                   '("Hello Christian")
-                   #:port-no 587
-                   #:auth-user "kshitijkarke@gmail.com")
+(mutt "testing"
+      #:to "9789962939@tmomail.net"
+      #:subject "hello world")
