@@ -2,6 +2,6 @@
 
 (require mutt)
 
-(mutt "testing"
+(mutt "test string"
       #:to "9789962939@tmomail.net"
-      #:subject "hello world")
+      #:subject "STOCK ALERT")
