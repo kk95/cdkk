@@ -16,10 +16,13 @@
 
 
 (define (make-stock-list)
-  (let ((stocklst (list)))
+  (let ((stocklst (list))
+        (stocksend #f)
+        (lastsend (current-seconds)))
     (lambda (command . opt)
       (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (car opt))))]
             [(eq? command 'remove_stock) (set! stocklst (remove (car opt) stocklst))]
+            [(eq? command 'toggle_send) (if stocksend (set! stocksend #f) (set! stocksend #t))]
             [(eq? command 'get_list)  stocklst]))))
 
 (define stock_list (make-stock-list))
@@ -41,7 +44,7 @@
 ;(define (view_open a) (begin  (print "view_open") (htdp:draw-message i "<print open price>") #t))
 ;(define (view_purchase a)  (begin  (print "view_purchase") (htdp:draw-message i "<print current price>") #t))
 ;(define (view_close a)  (begin (print "close") (htdp:draw-message i "<print close price>") #t))
-(define (set_auto a)  (begin (print "set_auto") #t))
+;(define (set_auto a)  (begin (print "set_auto") #t))
 ;(define (send a)  (begin (print "sent") #t))
 (define (nothing a) #t)
 
@@ -58,8 +61,8 @@
   (htdp:draw-message i (third (get-stock-values (htdp:text-contents text_box)))))
 (define (send a)
   (send-txt (htdp:text-contents text_box)))
-;(define (send_auto a)
-  ;(stock_list '
+(define (set_auto a)
+  (stock_list 'toggle_send))
 
 (define a (htdp:make-button "Add Stock" add_stock))
 (define b (htdp:make-button "Remove Stock" remove_stock))
@@ -76,7 +79,6 @@
 
 
 (define text_box h)
-
 
 
 
