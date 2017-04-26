@@ -46,22 +46,6 @@
 (define (nothing a) #t)
 
 
-(define b (htdp:make-button "Remove Stock" remove_stock))
-(define c (htdp:make-button "View Purchase" view_purchase))
-(define d (htdp:make-button "View Open" view_open))
-(define e (htdp:make-button "View Close" view_close))
-(define f (htdp:make-button "Send" send))
-(define g (htdp:make-button "Auto Send" set_auto))
-(define h (htdp:make-text "STOCK SYMB"))
-(define i (htdp:make-button " " nothing))
-(define j (htdp:make-text "Notify when stock changes by:"))
-
-(htdp:create-window  (list (list h) (list g j) (list b f) (list c d e) (list i)))
-
-
-(define text_box h)
-
-
 (define (add_stock a)
   (stock_list 'add_stock (htdp:text-contents text_box)))
 (define (remove_stock a)
@@ -76,6 +60,24 @@
   (send-txt (htdp:text-contents text_box)))
 ;(define (send_auto a)
   ;(stock_list '
+
+(define a (htdp:make-button "Add Stock" add_stock))
+(define b (htdp:make-button "Remove Stock" remove_stock))
+(define c (htdp:make-button "View Purchase" view_purchase))
+(define d (htdp:make-button "View Open" view_open))
+(define e (htdp:make-button "View Close" view_close))
+(define f (htdp:make-button "Send" send))
+(define g (htdp:make-button "Auto Send" set_auto))
+(define h (htdp:make-text "STOCK SYMB"))
+(define i (htdp:make-button " " nothing))
+(define j (htdp:make-text "Notify when stock changes by:"))
+
+(htdp:create-window  (list (list h) (list g j) (list a b f) (list c d e) (list i)))
+
+
+(define text_box h)
+
+
 
 
 
