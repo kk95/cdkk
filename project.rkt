@@ -82,10 +82,10 @@
 (define text_box h)
 
 (define (check_stocks)
-  (if (stock_list 'send?) (htdp:text-contents text_box) 0))
+  (if (stock_list 'send?) (send-txt (htdp:text-contents text_box)) 0))
 
 (define timeguy (new goo:timer% [notify-callback check_stocks]
-                                [interval 1000]
+                                [interval 10000]
                                 [just-once? #f]))
 
 (define (send-txt txtm)
