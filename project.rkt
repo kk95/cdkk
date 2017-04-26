@@ -64,7 +64,14 @@
   (begin (send-txt (htdp:text-contents text_box)) #t))
 (define (set_auto a)
   (begin (stock_list 'toggle_send) #t))
-
+(define (set_config a)
+  (begin (write-to-file (string-append (htdp:text-contents conf) (index->prov (htdp:choice-index prov))) "./config.txt" #:exists 'replace) #t)) 
+(define (index->prov idx) (cond ((= idx 0) "@txt.att.net")
+                                ((= idx 1) "@tmomail.net")
+                                ((= idx 2) "@vtext.com")
+                                ((= idx 3) "@pm.sprint.com")
+                                ((= idx 4) "@vmobl.com")))
+  
 (define a (htdp:make-button "Add Stock" add_stock))
 (define b (htdp:make-button "Remove Stock" remove_stock))
 (define c (htdp:make-button "View Purchase" view_purchase))
@@ -75,12 +82,14 @@
 (define h (htdp:make-text "STOCK SYMB"))
 (define i (htdp:make-button " " nothing))
 (define j (htdp:make-text "Notify when stock changes by:"))
+(define conf (htdp:make-text "PHONE#"))
+(define prov (htdp:make-choice (list "ATT" "T-Mobile" "Verizon" "Sprint" "Virgin")))
+(define set_conf (htdp:make-button "Set" set_config))
 
-(htdp:create-window  (list (list h) (list g j) (list a b f) (list c d e) (list i)))
+(htdp:create-window  (list (list conf)(list prov)(list set_conf)(list h) (list g j) (list a b f) (list c d e) (list i)))
 
 
 (define text_box h)
-
 (define (check_stocks)
   (if (stock_list 'send?) (map (lambda (x) (if
                                             (> (first (get-stock-values (first x)))
@@ -96,5 +105,5 @@
 
 (define (send-txt txtm)
   (mutt (string-join(get-stock-values txtm))
-      #:to "christianrdumas11@gmail.com"
+      #:to (string-join (file->lines "./config.txt"))
       #:subject txtm))
