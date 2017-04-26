@@ -7,7 +7,7 @@
 (require xml)
 (require html)
 (require (prefix-in htdp: htdp/gui))
-
+(require (prefix-in goo: racket/gui))
 
 
 (define (get-stock-values stksymbol)
@@ -23,6 +23,7 @@
       (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (car opt))))]
             [(eq? command 'remove_stock) (set! stocklst (remove (car opt) stocklst))]
             [(eq? command 'toggle_send) (if stocksend (set! stocksend #f) (set! stocksend #t))]
+            [(eq? command 'send?) stocksend]
             [(eq? command 'get_list)  stocklst]))))
 
 (define stock_list (make-stock-list))
@@ -50,19 +51,19 @@
 
 
 (define (add_stock a)
-  (stock_list 'add_stock (htdp:text-contents text_box)))
+  (begin (stock_list 'add_stock (htdp:text-contents text_box)) #t))
 (define (remove_stock a)
-  (stock_list 'remove_stock (htdp:text-contents text_box)))
+  (begin (stock_list 'remove_stock (htdp:text-contents text_box)) #t))
 (define (view_purchase a)
-  (htdp:draw-message i (first (get-stock-values (htdp:text-contents text_box)))))
+  (begin (htdp:draw-message i (first (get-stock-values (htdp:text-contents text_box)))) #t))
 (define (view_open a)
-  (htdp:draw-message i (second (get-stock-values (htdp:text-contents text_box)))))
+  (begin (htdp:draw-message i (second (get-stock-values (htdp:text-contents text_box)))) #t))
 (define (view_close a)
-  (htdp:draw-message i (third (get-stock-values (htdp:text-contents text_box)))))
+  (begin (htdp:draw-message i (third (get-stock-values (htdp:text-contents text_box)))) #t))
 (define (send a)
-  (send-txt (htdp:text-contents text_box)))
+  (begin (send-txt (htdp:text-contents text_box)) #t))
 (define (set_auto a)
-  (stock_list 'toggle_send))
+  (begin (stock_list 'toggle_send) #t))
 
 (define a (htdp:make-button "Add Stock" add_stock))
 (define b (htdp:make-button "Remove Stock" remove_stock))
@@ -80,9 +81,12 @@
 
 (define text_box h)
 
+(define (check_stocks)
+  (if (stock_list 'send?) (htdp:text-contents text_box) 0))
 
-
-
+(define timeguy (new goo:timer% [notify-callback check_stocks]
+                                [interval 1000]
+                                [just-once? #f]))
 
 (define (send-txt txtm)
   (mutt (string-join(get-stock-values txtm))
