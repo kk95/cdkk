@@ -1,13 +1,18 @@
 #lang racket
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 (require mutt)
 >>>>>>> b01e2bd349395d30881690a02564544b4e8513d6
+=======
+(require mutt)
+>>>>>>> kk
 (require csv-reading)
 (require net/url)
 (require xml)
 (require html)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 (print "Command Line:")
@@ -36,6 +41,8 @@
 
 (define method (stkinterp (read)))
 =======
+=======
+>>>>>>> kk
 (print "Enter the stock symbol")
 
 ;(define stksymbol (read))
@@ -58,5 +65,9 @@
       #:to "9789962939@tmomail.net"
       #:subject (symbol->string txtm)))
 (define s (read))
+<<<<<<< HEAD
 (send-txt s)
 >>>>>>> b01e2bd349395d30881690a02564544b4e8513d6
+=======
+(send-txt s)
+>>>>>>> kk
