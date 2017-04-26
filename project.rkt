@@ -20,8 +20,8 @@
         (stocksend #f)
         (lastsend (current-seconds)))
     (lambda (command . opt)
-      (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (first opt))))]
-            [(eq? command 'remove_stock) (set! stocklst (remove (first opt) stocklst))]
+      (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (cons (first opt) (get-stock-values (first opt))))))]
+            [(eq? command 'remove_stock) (set! stocklst (remove (first opt) stocklst (lambda (x y) (equal? x (car y)))))]
             [(eq? command 'toggle_send) (if stocksend (set! stocksend #f) (set! stocksend #t))]
             [(eq? command 'send?) stocksend]
             [(eq? command 'get_list)  stocklst]))))
@@ -82,13 +82,19 @@
 (define text_box h)
 
 (define (check_stocks)
-  (if (stock_list 'send?) (send-txt (htdp:text-contents text_box)) 0))
+  (if (stock_list 'send?) (map (lambda (x) (if
+                                            (> (first (get-stock-values (first x)))
+                                               (* (second (first (member
+                                                                  (first x)
+                                                                  (stock_list 'get_list)
+                                                                  (lambda (argh aargh) (equal? argh (first aargh))))))
+                                                  1.1)) (send-txt (first x)) 0)) (stock_list 'get_list)) 0))
 
 (define timeguy (new goo:timer% [notify-callback check_stocks]
-                                [interval 10000]
+                                [interval 1000]
                                 [just-once? #f]))
 
 (define (send-txt txtm)
   (mutt (string-join(get-stock-values txtm))
-      #:to "9789962939@tmomail.net"
+      #:to "christianrdumas11@gmail.com"
       #:subject txtm))
