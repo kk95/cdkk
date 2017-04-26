@@ -9,15 +9,20 @@
 (require (prefix-in htdp: htdp/gui))
 
 
-(print "Command Line:")
-
-(newline)
-
-
 
 (define (get-stock-values stksymbol)
-  (map cadr (cdadr (csv->sxml (pcdata-string (car (read-html-as-xml (get-pure-port (string->url (string-append "http://download.finance.yahoo.com/d/quotes.csv?s=" (symbol->string stksymbol) "&f=po"))))))))))
+  (map cadr (cdadr (csv->sxml (pcdata-string (car (read-html-as-xml (get-pure-port (string->url (string-append "http://download.finance.yahoo.com/d/quotes.csv?s=" stksymbol "&f=bop"))))))))))
 
+
+
+(define (make-stock-list)
+  (let ((stocklst (list)))
+    (lambda (command . opt)
+      (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (car opt))))]
+            [(eq? command 'remove_stock) (set! stocklst (remove (car opt) stocklst))]
+            [(eq? command 'get_list)  stocklst]))))
+
+(define stock_list (make-stock-list))
 
 (define (make-stock symbolname)
   (let ((stocksymbol symbolname)
@@ -30,13 +35,14 @@
 
 
 
-(define (add_stock a) (begin (print "as") #t))
-(define (remove_stock a)  (begin  (print "stock") #t))
-(define (view_open a) (begin  (print "view_open") (htdp:draw-message i "<print open price>") #t))
-(define (view_purchase a)  (begin  (print "view_purchase") (htdp:draw-message i "<print current price>") #t))
-(define (view_close a)  (begin (print "close") (htdp:draw-message i "<print close price>") #t))
+
+;(define (add_stock a) (begin (print "as") #t))
+;(define (remove_stock a)  (begin  (print "stock") #t))
+;(define (view_open a) (begin  (print "view_open") (htdp:draw-message i "<print open price>") #t))
+;(define (view_purchase a)  (begin  (print "view_purchase") (htdp:draw-message i "<print current price>") #t))
+;(define (view_close a)  (begin (print "close") (htdp:draw-message i "<print close price>") #t))
 (define (set_auto a)  (begin (print "set_auto") #t))
-(define (send a)  (begin (print "sent") #t))
+;(define (send a)  (begin (print "sent") #t))
 (define (nothing a) #t)
 
 
@@ -53,10 +59,28 @@
 (htdp:create-window  (list (list h) (list g j) (list b f) (list c d e) (list i)))
 
 
+(define text_box h)
+
+
+(define (add_stock a)
+  (stock_list 'add_stock (htdp:text-contents text_box)))
+(define (remove_stock a)
+  (stock_list 'remove_stock (htdp:text-contents text_box)))
+(define (view_purchase a)
+  (htdp:draw-message i (first (get-stock-values (htdp:text-contents text_box)))))
+(define (view_open a)
+  (htdp:draw-message i (second (get-stock-values (htdp:text-contents text_box)))))
+(define (view_close a)
+  (htdp:draw-message i (third (get-stock-values (htdp:text-contents text_box)))))
+(define (send a)
+  (send-txt (htdp:text-contents text_box)))
+;(define (send_auto a)
+  ;(stock_list '
+
 
 
 
 (define (send-txt txtm)
   (mutt (string-join(get-stock-values txtm))
       #:to "9789962939@tmomail.net"
-      #:subject (symbol->string txtm)))
+      #:subject txtm))
