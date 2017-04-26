@@ -20,8 +20,8 @@
         (stocksend #f)
         (lastsend (current-seconds)))
     (lambda (command . opt)
-      (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (car opt))))]
-            [(eq? command 'remove_stock) (set! stocklst (remove (car opt) stocklst))]
+      (cond [(eq? command 'add_stock) (set! stocklst (append stocklst (list (first opt))))]
+            [(eq? command 'remove_stock) (set! stocklst (remove (first opt) stocklst))]
             [(eq? command 'toggle_send) (if stocksend (set! stocksend #f) (set! stocksend #t))]
             [(eq? command 'send?) stocksend]
             [(eq? command 'get_list)  stocklst]))))
