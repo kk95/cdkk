@@ -96,7 +96,7 @@
                                                (* (second (first (member
                                                                   (first x)
                                                                   (stock_list 'get_list)
-                                                                  (lambda (argh aargh) (equal? argh (first aargh))))))
+                                                                  (lambda (findval listval) (equal? findval (first listval))))))
                                                   1.1)) (send-txt (first x)) 0)) (stock_list 'get_list)) 0))
 
 (define timeguy (new goo:timer% [notify-callback check_stocks]
